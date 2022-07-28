@@ -1,5 +1,7 @@
-package com.knubisoft.base.numbers;
+package com.knubisoft.base.list.numbers;
 
+import com.knubisoft.base.numbers.NumbersTasks;
+import com.knubisoft.base.numbers.NumbersTasksImpl;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
