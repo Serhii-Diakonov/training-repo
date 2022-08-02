@@ -1,9 +1,9 @@
 package com.knubisoft.base.trees;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 public class TreeTasksImpl implements TreeTasks {
@@ -31,7 +31,11 @@ public class TreeTasksImpl implements TreeTasks {
     @Override
     public boolean isSymmetric(TreeNode node) {
         if (node != null) {
-
+            List<Integer> tree = inorderTraversal(node);
+            if (tree.size() % 2 == 0) return false;
+            List<Integer> reversedPart = tree.subList(tree.size() / 2 + 1, tree.size());
+            Collections.reverse(reversedPart);
+            return tree.subList(0, tree.size() / 2).equals(reversedPart);
         }
         return false;
     }
@@ -64,10 +68,11 @@ public class TreeTasksImpl implements TreeTasks {
 
     @Override
     public TreeNode invertTree(TreeNode node) {
-        if(node != null){
-            if(node.left != null && node.right != null){
+        if (node != null) {
+            if (node.left != null && node.right != null) {
+                TreeNode rightNode = node.right;
                 node.right = invertTree(node.left);
-                node.left = invertTree(node.right);
+                node.left = invertTree(rightNode);
             }
             return node;
         }

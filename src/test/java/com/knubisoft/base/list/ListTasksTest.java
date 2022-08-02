@@ -38,39 +38,27 @@ public class ListTasksTest {
     @Test
     public void getElementsByIndexesSuccessful() {
         List<String> actualFirst = instance
-                .getElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 3});
-        assertEquals("Alex", actualFirst.get(0));
-        assertEquals("Bob", actualFirst.get(1));
-        assertEquals("Alica", actualFirst.get(2));
-        assertEquals("Alica", actualFirst.get(3));
-        assertEquals("Alica", actualFirst.get(4));
+                .getElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 0});
+        assertEquals("Alica", actualFirst.get(0));
+        assertEquals("Alex", actualFirst.get(1));
 
         List<String> actualSecond = instance
                 .getElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 2, 1});
-        assertEquals("Alex", actualSecond.get(0));
-        assertEquals("Bob", actualSecond.get(1));
-        assertEquals("Alica", actualSecond.get(2));
-        assertEquals("Alica", actualSecond.get(3));
-        assertEquals("Alica", actualSecond.get(4));
-        assertEquals("Bob", actualSecond.get(5));
+        assertEquals("Alica", actualSecond.get(0));
+        assertEquals("Alica", actualSecond.get(1));
+        assertEquals("Bob", actualSecond.get(2));
 
         List<String> actualThird = instance
                 .getElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 1});
-        assertEquals("Alex", actualThird.get(0));
+        assertEquals("Alica", actualThird.get(0));
         assertEquals("Bob", actualThird.get(1));
-        assertEquals("Alica", actualThird.get(2));
-        assertEquals("Alica", actualThird.get(3));
-        assertEquals("Bob", actualThird.get(4));
 
         List<String> actualFourth = instance
                 .getElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 1, 1, 1});
-        assertEquals("Alex", actualFourth.get(0));
+        assertEquals("Alica", actualFourth.get(0));
         assertEquals("Bob", actualFourth.get(1));
-        assertEquals("Alica", actualFourth.get(2));
-        assertEquals("Alica", actualFourth.get(3));
-        assertEquals("Bob", actualFourth.get(4));
-        assertEquals("Bob", actualFourth.get(5));
-        assertEquals("Bob", actualFourth.get(6));
+        assertEquals("Bob", actualFourth.get(2));
+        assertEquals("Bob", actualFourth.get(3));
     }
 
     @Test
@@ -79,16 +67,16 @@ public class ListTasksTest {
                 () -> instance.getElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")), null));
         assertThrows(IllegalArgumentException.class,
                 () -> instance.getElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {2, Integer.MIN_VALUE}));
+                        new int[]{2, Integer.MIN_VALUE}));
         assertThrows(IllegalArgumentException.class,
                 () -> instance.getElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {Integer.MAX_VALUE, -1}));
+                        new int[]{Integer.MAX_VALUE, -1}));
         assertThrows(IllegalArgumentException.class,
                 () -> instance.getElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {0, Integer.MAX_VALUE}));
+                        new int[]{0, Integer.MAX_VALUE}));
         assertThrows(IllegalArgumentException.class,
                 () -> instance.getElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {Integer.MIN_VALUE, Integer.MAX_VALUE}));
+                        new int[]{Integer.MIN_VALUE, Integer.MAX_VALUE}));
     }
 
     @Test
@@ -105,27 +93,27 @@ public class ListTasksTest {
                 .addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 1});
         assertEquals("Alex", actualSecond.get(0));
         assertEquals("Bob", actualSecond.get(1));
-        assertEquals("Bob", actualSecond.get(2));
+        assertEquals("Alica", actualSecond.get(2));
         assertEquals("Alica", actualSecond.get(3));
-        assertEquals("Alica", actualSecond.get(4));
+        assertEquals("Bob", actualSecond.get(4));
 
         ArrayList<String> actualThird = instance
-                .addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 1});
+                .addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Alica", "Bob")), new int[]{2, 1});
         assertEquals("Alex", actualThird.get(0));
-        assertEquals("Bob", actualThird.get(1));
+        assertEquals("Alica", actualThird.get(1));
         assertEquals("Bob", actualThird.get(2));
-        assertEquals("Alica", actualThird.get(3));
+        assertEquals("Bob", actualThird.get(3));
         assertEquals("Alica", actualThird.get(4));
 
         ArrayList<String> actualFourth = instance
                 .addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 1, 1, 1});
         assertEquals("Alex", actualFourth.get(0));
         assertEquals("Bob", actualFourth.get(1));
-        assertEquals("Bob", actualFourth.get(2));
-        assertEquals("Bob", actualFourth.get(3));
+        assertEquals("Alica", actualFourth.get(2));
+        assertEquals("Alica", actualFourth.get(3));
         assertEquals("Bob", actualFourth.get(4));
-        assertEquals("Alica", actualFourth.get(5));
-        assertEquals("Alica", actualFourth.get(6));
+        assertEquals("Bob", actualFourth.get(5));
+        assertEquals("Bob", actualFourth.get(6));
     }
 
     @Test
@@ -134,61 +122,75 @@ public class ListTasksTest {
                 () -> instance.addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")), null));
         assertThrows(IllegalArgumentException.class,
                 () -> instance.addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {2, Integer.MIN_VALUE}));
+                        new int[]{2, Integer.MIN_VALUE}));
         assertThrows(IllegalArgumentException.class,
                 () -> instance.addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {Integer.MAX_VALUE, -1}));
+                        new int[]{Integer.MAX_VALUE, -1}));
         assertThrows(IllegalArgumentException.class,
                 () -> instance.addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {0, Integer.MAX_VALUE}));
+                        new int[]{0, Integer.MAX_VALUE}));
         assertThrows(IllegalArgumentException.class,
                 () -> instance.addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {Integer.MIN_VALUE, Integer.MAX_VALUE}));
+                        new int[]{Integer.MIN_VALUE, Integer.MAX_VALUE}));
     }
 
     @Test
     public void setElementsByIndexesSuccessful() {
         LinkedList<String> actualFirst = instance
-                .setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 2});
+                .setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 2},
+                        new LinkedList<>(Arrays.asList("Peter", "Piper")));
         assertEquals("Alex", actualFirst.get(0));
         assertEquals("Bob", actualFirst.get(1));
-        assertEquals("Alica", actualFirst.get(2));
+        assertEquals("Piper", actualFirst.get(2));
 
         LinkedList<String> actualSecond = instance
-                .setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 1, 2});
-        assertEquals("Alex", actualSecond.get(0));
+                .setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 1, 0},
+                        new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")));
+        assertEquals("Alica", actualSecond.get(0));
         assertEquals("Bob", actualSecond.get(1));
-        assertEquals("Alica", actualSecond.get(2));
+        assertEquals("Alex", actualSecond.get(2));
+
 
         LinkedList<String> actualThird = instance
-                .setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 1});
-        assertEquals("Alex", actualThird.get(0));
-        assertEquals("Bob", actualThird.get(1));
+                .setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{0, 1, 0, 1},
+                        new LinkedList<>(Arrays.asList("Whie", "Whai", "Whoe", "Wham")));
+        assertEquals("Whoe", actualThird.get(0));
+        assertEquals("Wham", actualThird.get(1));
         assertEquals("Alica", actualThird.get(2));
-
-        LinkedList<String> actualFourth = instance
-                .setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")), new int[]{2, 1, 1, 1});
-        assertEquals("Alex", actualFourth.get(0));
-        assertEquals("Bob", actualFourth.get(1));
-        assertEquals("Alica", actualFourth.get(2));
     }
 
     @Test
     public void setElementsByIndexesFail() {
         assertThrows(IllegalArgumentException.class,
-                () -> instance.addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")), null));
+                () -> instance.setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")), null,
+                        new LinkedList<>(Arrays.asList("Peter", "Piper"))));
         assertThrows(IllegalArgumentException.class,
-                () -> instance.addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {2, Integer.MIN_VALUE}));
+                () -> instance.setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")),
+                        new int[]{2, Integer.MIN_VALUE}, new LinkedList<>(Arrays.asList("Peter", "Piper"))));
         assertThrows(IllegalArgumentException.class,
-                () -> instance.addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {Integer.MAX_VALUE, -1}));
+                () -> instance.setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")),
+                        new int[]{Integer.MAX_VALUE, -1}, new LinkedList<>(Arrays.asList("Peter", "Piper"))));
         assertThrows(IllegalArgumentException.class,
-                () -> instance.addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {0, Integer.MAX_VALUE}));
+                () -> instance.setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")),
+                        new int[]{0, Integer.MAX_VALUE}, new LinkedList<>(Arrays.asList("Peter", "Piper"))));
         assertThrows(IllegalArgumentException.class,
-                () -> instance.addElementsByIndexes(new ArrayList<>(Arrays.asList("Alex", "Bob", "Alica")),
-                        new int[] {Integer.MIN_VALUE, Integer.MAX_VALUE}));
+                () -> instance.setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")),
+                        new int[]{Integer.MIN_VALUE, Integer.MAX_VALUE}, new LinkedList<>(Arrays.asList("Peter", "Piper"))));
+        assertThrows(IllegalArgumentException.class,
+                () -> instance.setElementsByIndexes(null, new int[]{2, 1},
+                        new LinkedList<>(Arrays.asList("Peter", "Piper"))));
+        assertThrows(IllegalArgumentException.class,
+                () -> instance.setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")),
+                        new int[]{2, 1}, null));
+        assertThrows(IllegalArgumentException.class,
+                () -> instance.setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")),
+                        new int[]{2, 1}, new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica"))));
+        assertThrows(IllegalArgumentException.class,
+                () -> instance.setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")),
+                        new int[]{2, 21, 2}, new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica"))));
+        assertThrows(IllegalArgumentException.class,
+                () -> instance.setElementsByIndexes(new LinkedList<>(Arrays.asList("Alex", "Bob", "Alica")),
+                        new int[]{2, 21, 2}, new LinkedList<>(Arrays.asList("Alex", "Bob"))));
     }
 
     @Test
@@ -429,7 +431,7 @@ public class ListTasksTest {
 
     @Test
     public void getLastElementSuccessful() {
-        LinkedList <String> list = new LinkedList<>();
+        LinkedList<String> list = new LinkedList<>();
         list.add("Red");
         list.add("Green");
         list.add("Black");
@@ -444,7 +446,7 @@ public class ListTasksTest {
 
     @Test
     public void getLastElementFail() {
-        LinkedList <String> list = new LinkedList<>();
+        LinkedList<String> list = new LinkedList<>();
         assertEquals("", instance.getLastElement(list));
         assertThrows(NoSuchElementException.class, () -> instance.getLastElement(null));
     }

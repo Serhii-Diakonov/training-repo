@@ -20,7 +20,7 @@ public interface ListTasks {
     /**
      * Set elements by indexes and return a new list.
      * */
-    LinkedList<String> setElementsByIndexes(LinkedList<String> elements, int[] indexes);
+    LinkedList<String> setElementsByIndexes(LinkedList<String> elements, int[] indexes, LinkedList<String> values);
     /**
      * Get size of list.
      * */
