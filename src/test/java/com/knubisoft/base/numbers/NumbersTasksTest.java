@@ -1,4 +1,4 @@
-package com.knubisoft.base.list.numbers;
+package com.knubisoft.base.numbers;
 
 import com.knubisoft.base.numbers.NumbersTasks;
 import com.knubisoft.base.numbers.NumbersTasksImpl;
