@@ -4,13 +4,13 @@ BASE
 1. Arrays -- DONE (Note: some tasks were resolved in different ways, but will be refactored later for better representation)
 2. Bool -- started
 3. Date -- 
-4. List -- started
+4. List -- DONE
 5. Numbers -- 
 6. Pattern -- DONE (Note: needs refactoring)
-7. Queue --
+7. Queue -- DONE
 8. Reflection --
 9. String --
-10. Trees -- almost done
+10. Trees -- DONE
 11. Validation --
 
 ALGORITHMS
