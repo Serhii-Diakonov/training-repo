@@ -4,6 +4,15 @@ import java.math.BigInteger;
 
 public interface NumbersTasks {
 
+    static class IntWrapper{
+        private Integer value;
+        public IntWrapper(Integer i ){
+            value = i;
+        }
+        public Integer getValue(){return value;}
+        public void setValue(Integer i){value = i;}
+    }
+
     /**
      * Given two numbers, firstNumber, and secondNumber, swap two numbers without using a third variable.
      *
@@ -15,7 +24,7 @@ public interface NumbersTasks {
      * @param firstNumber number to swap.
      * @param secondNumber number to swap.
      */
-    void swapTwoNumbersWithoutUsingTemporaryVariable(int firstNumber, int secondNumber);
+    void swapTwoNumbersWithoutUsingTemporaryVariable(IntWrapper firstNumber, IntWrapper secondNumber);
 
     /**
      * Given an integer, the task is to find out whether the given number is an Ugly number or not .
