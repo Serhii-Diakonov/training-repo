@@ -13,6 +13,50 @@ class NumbersTasksTest {
     NumbersTasks numbersTasks = new NumbersTasksImpl();
 
     @Test
+    void swapTwoNumbersWithoutUsingTemporaryVariableSuccess() {
+        NumbersTasksImpl.IntWrapper num1 = new NumbersTasksImpl.IntWrapper(24);
+        NumbersTasksImpl.IntWrapper num2 = new NumbersTasksImpl.IntWrapper(68);
+        NumbersTasksImpl.IntWrapper num3 = new NumbersTasksImpl.IntWrapper(-8);
+        NumbersTasksImpl.IntWrapper num4 = new NumbersTasksImpl.IntWrapper(Integer.MAX_VALUE);
+        NumbersTasksImpl.IntWrapper num5 = new NumbersTasksImpl.IntWrapper(Integer.MIN_VALUE);
+        NumbersTasksImpl.IntWrapper num6 = new NumbersTasksImpl.IntWrapper(0);
+
+        numbersTasks.swapTwoNumbersWithoutUsingTemporaryVariable(num1, num2);
+        assertEquals(68, num1.getValue());
+        assertEquals(24, num2.getValue());
+
+        numbersTasks.swapTwoNumbersWithoutUsingTemporaryVariable(num2, num1);
+        assertEquals(68, num2.getValue());
+        assertEquals(24, num1.getValue());
+
+        numbersTasks.swapTwoNumbersWithoutUsingTemporaryVariable(num3, num6);
+        assertEquals(-8, num6.getValue());
+        assertEquals(0, num3.getValue());
+
+        numbersTasks.swapTwoNumbersWithoutUsingTemporaryVariable(num4, num5);
+        assertEquals(Integer.MIN_VALUE, num4.getValue());
+        assertEquals(Integer.MAX_VALUE, num5.getValue());
+    }
+
+    @Test
+    void swapTwoNumbersWithoutUsingTemporaryVariableFail() {
+        NumbersTasksImpl.IntWrapper num1 = new NumbersTasksImpl.IntWrapper(null);
+        NumbersTasksImpl.IntWrapper num2 = new NumbersTasksImpl.IntWrapper(68);
+
+        assertThrows(RuntimeException.class,
+                () -> numbersTasks.swapTwoNumbersWithoutUsingTemporaryVariable(num1, num2));
+
+        assertThrows(RuntimeException.class,
+                () -> numbersTasks.swapTwoNumbersWithoutUsingTemporaryVariable(num2, num1));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> numbersTasks.swapTwoNumbersWithoutUsingTemporaryVariable(null, num2));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> numbersTasks.swapTwoNumbersWithoutUsingTemporaryVariable(num1, null));
+    }
+
+    @Test
     void isUglyNumber() {
         assertFalse(numbersTasks.isUglyInt(235));
         assertTrue(numbersTasks.isUglyInt(4));
