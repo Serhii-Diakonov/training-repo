@@ -137,7 +137,7 @@ public interface StringTasks {
      *      output = {'11123121211111111'}
      * Example 2:
      *      input = {'aaaaaaaaaaaa'}
-     *      output = {'123456789123123456789121234567891123456789123456781234567123456123451234123121'}
+     *      output = {'123456789123 12345678912 1234567891 123456789 12345678 1234567 123456 12345 1234 123 121'}
      * @param str - string.
      * */
     String getCountRepeatableString(String str);
