@@ -1,10 +1,12 @@
 package com.knubisoft.base.date;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.WeekFields;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Locale;
 
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
@@ -33,7 +35,7 @@ public class DateTasksImpl implements DateTasks {
         return getBiggestDateTime(dt1, getBiggestDateTime(dt2, dt3)).format(formatter);
     }
 
-    private LocalDateTime getBiggestDateTime(LocalDateTime dt1, LocalDateTime dt2){
+    private LocalDateTime getBiggestDateTime(LocalDateTime dt1, LocalDateTime dt2) {
         return dt1.compareTo(dt2) > 0 ? dt1 : dt2;
     }
 
@@ -60,16 +62,22 @@ public class DateTasksImpl implements DateTasks {
 
     @Override
     public long getNumberOfDaysBetweenTwoDates(String date1, String date2) {
-        return -1;
+        LocalDate dt1 = LocalDate.parse(date1);
+        LocalDate dt2 = LocalDate.parse(date2);
+        return ChronoUnit.DAYS.between(dt1, dt2);
     }
 
     @Override
     public String[] getTheNextAndPreviousFriday(String date) {
-        return null;
+        LocalDate dt = LocalDate.parse(date);
+        return new String[]{
+                dt.with(TemporalAdjusters.previous(DayOfWeek.FRIDAY)).toString(),
+                dt.with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).toString()};
     }
 
     @Override
     public int getNumberOfMonthsRemainingInTheYear(String date) {
-        return -1;
+        LocalDate dt = LocalDate.parse(date);
+        return (int) ChronoUnit.MONTHS.between(dt, dt.with(TemporalAdjusters.lastDayOfYear()));
     }
 }
