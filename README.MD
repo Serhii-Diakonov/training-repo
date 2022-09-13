@@ -3,7 +3,7 @@ Here is a list of all training tasks here and the progress:
 BASE
 1. Arrays -- DONE (Note: some tasks were resolved in different ways, but will be refactored later for better representation)
 2. Bool -- started
-3. Date -- 
+3. Date -- DONE
 4. List -- DONE
 5. Numbers -- DONE 
 6. Pattern -- DONE (Note: needs refactoring)
@@ -14,7 +14,7 @@ BASE
 11. Validation --
 
 ALGORITHMS
-12. Charsinserting --
+12. Charsinserting -- DONE
 13. Collection -- 
 14. Fibonacci -- 
 15. JSON -- 
